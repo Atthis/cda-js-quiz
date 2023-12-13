@@ -6,8 +6,8 @@ const quizData = [
 ];
 
 // select html elements
-const questContainer = document.querySelector('.questions-block');
 const questForm = document.querySelector('#questions');
+const questContainer = document.querySelector('.questions-block');
 const scoreParagraph = document.querySelector('.score');
 
 // generate html elements
@@ -63,10 +63,12 @@ function calcScore(answers, rightAnswers) {
 
   for (let i = 0; i < answers.size; i++) {
     questContainer.children[i].children[0].classList.remove('false', 'true');
+
     if (answers.get(`quest${i}`) !== rightAnswers[i][2]) {
       questContainer.children[i].children[0].classList.add('false');
       continue;
     }
+
     questContainer.children[i].children[0].classList.add('true');
     score++;
   }
@@ -80,7 +82,7 @@ questForm.addEventListener('submit', e => {
 
   const formAnswers = getAnswers(e.target);
 
-  let score = calcScore(formAnswers, quizData);
+  const score = calcScore(formAnswers, quizData);
 
   scoreParagraph.innerText = `Votre score est de ${score}.`;
 });
